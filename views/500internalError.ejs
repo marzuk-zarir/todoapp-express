@@ -1,0 +1,21 @@
+{%- include('./layouts/header.ejs') %}
+
+<div class="container pt-5">
+    {% if(message) { %}
+    <p class="lead text-danger">{%= message %}</p>
+    {% } else { %}
+    <div class="mx-auto" style="max-width: 500px">
+        <img
+            src="/static/assets/something-went-wrong.svg"
+            class="img-fluid"
+            alt="Something went wrong"
+        />
+    </div>
+    <p class="lead text-danger text-center py-4">
+        Something went wrong please try again later
+    </p>
+    <p class="text-center"><a href="/" class="btn btn-primary">Back to Home</a></p>
+    {% } %}
+</div>
+
+{%- include('./layouts/footer.ejs') %}

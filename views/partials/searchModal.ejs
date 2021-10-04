@@ -1,0 +1,37 @@
+<!-- Search modal -->
+<div
+    class="modal fade"
+    id="search-modal"
+    data-bs-backdrop="static"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h3 class="modal-title">Search</h3>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <input
+                    class="form-control"
+                    type="text"
+                    placeholder="What are you looking for..."
+                    aria-label="Search input field"
+                />
+                <div class="pt-3">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <div class="ms-2">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End search modal -->
