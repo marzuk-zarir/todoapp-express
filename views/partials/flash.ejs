@@ -1,0 +1,15 @@
+{% if(message) { %}
+<!-- Flash message -->
+{% if(message.success) { %}
+<div class="flash flash-success" role="flash">
+    <i class="bi bi-check-circle-fill"></i> {%= message.success %}
+</div>
+{% } %} {% if(message.error) { %}
+<div class="flash flash-danger" role="flash">
+    <p class="mb-0">
+        <i class="bi bi-exclamation-diamond-fill"></i> {%= message.error %}
+    </p>
+</div>
+{% } %}
+<!-- End flash message -->
+{% } %}

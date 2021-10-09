@@ -1,0 +1,22 @@
+<div class="modal fade" id="logoutModal" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/auth/logout" method="post" class="d-inline">
+                <div class="modal-body py-2">
+                    <p class="lead text-danger mb-0">Are you sure want to logout?</p>
+                </div>
+                <div class="modal-footer bg-white px-3 py-2">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <input
+                        type="hidden"
+                        name="_csrf"
+                        value="{%- csrfToken ? csrfToken : '' %}"
+                    />
+                    <input type="submit" class="btn btn-danger" value="Logout" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

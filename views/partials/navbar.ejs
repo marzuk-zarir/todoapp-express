@@ -1,5 +1,5 @@
 <!-- Top navbar -->
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top py-2">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-lg fixed-top py-2">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Todo App</a>
         <button
@@ -14,28 +14,26 @@
         </button>
         <div class="collapse navbar-collapse" id="top-navbar">
             <ul class="navbar-nav me-auto">
+                {% if(user.isLoggedIn) { %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/todo/user">Todo</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/todo">Todo</a>
-                </li>
+                {% } %}
             </ul>
             <div class="pt-2 pt-md-0">
-                <button
-                    class="btn btn-dark text-light me-1"
-                    data-bs-toggle="modal"
-                    data-bs-target="#search-modal"
+                {% if(!user.isLoggedIn) { %}
+                <li class="nav-item">
+                    <a class="btn btn-warning me-1" href="/auth/signup">Sign up</a>
+                    <a class="btn btn-success me-1" href="/auth/login">Login</a>
+                </li>
+                {% } %} {% if(user.isLoggedIn) { %}
+                <a class="btn btn-danger me-1" href="#logoutModal" data-bs-toggle="modal"
+                    >Logout</a
                 >
-                    <i class="bi bi-search"></i> Search
-                </button>
-                <a class="btn btn-warning me-1" href="/auth/signup">Sign up</a>
-                <a class="btn btn-success me-1" href="/auth/login">Login</a>
-                <a class="btn btn-danger" href="/auth/logout">Logout</a>
+                {% } %}
             </div>
         </div>
     </div>
 </nav>
+{% if(user.isLoggedIn) { %} {%- include('./logout.ejs') %} {% } %}
 <!-- End top navbar -->
-
-{%- include('./searchModal.ejs') %}

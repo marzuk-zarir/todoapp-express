@@ -1,0 +1,202 @@
+{%- include('./layouts/header.ejs') %}
+
+<!-- Signup form  -->
+<div class="container">
+    {%- include('./partials/flash.ejs') %}
+    <div class="row justify-content-center signup-row">
+        <div class="col-md-9 col-lg-6 col-xl-5 pe-lg-0">
+            <div class="card border-0 rounded-start shadow-none bg-light">
+                <div class="card-body px-3 px-md-4">
+                    <h1 class="h2 fw-light text-center mb-4">Create a user account</h1>
+                    <form action="/auth/signup" method="post">
+                        <div class="mb-3">
+                            <label
+                                for="username"
+                                class="form-label"
+                                data-bs-toggle="tooltip"
+                                title="Username should be unique and contains only alphanumeric characters"
+                                >Username</label
+                            >
+                            <input
+                                type="text"
+                                class="
+                                    form-control
+                                    {%-
+                                    errors.username
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %}
+                                "
+                                id="username"
+                                name="username"
+                                value="{%- values.username ? values.username : '' %}"
+                                placeholder="Enter your username"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                *{%= errors.username ? errors.username : '' %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="email"
+                                class="form-label"
+                                data-bs-toggle="tooltip"
+                                title="Email should be valid"
+                                >Email Address</label
+                            >
+                            <input
+                                type="text"
+                                class="
+                                    form-control
+                                    {%-
+                                    errors.email
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %}
+                                "
+                                id="email"
+                                name="email"
+                                value="{%- values.email ? values.email : '' %}"
+                                placeholder="Enter your email address"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                *{%= errors.email ? errors.email : '' %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="password"
+                                class="form-label"
+                                data-bs-toggle="tooltip"
+                                title="Password should contains at least 7 characters"
+                                >Password</label
+                            >
+                            <input
+                                type="password"
+                                class="
+                                    form-control
+                                    {%-
+                                    errors.password
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %}
+                                "
+                                id="password"
+                                name="password"
+                                value="{%- values.password ? values.password : '' %}"
+                                placeholder="Enter your password"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                *{%= errors.password ? errors.password : '' %}
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label
+                                for="cpassword"
+                                class="form-label"
+                                data-bs-toggle="tooltip"
+                                title="Confirm password for better safety"
+                                >Confirm Password</label
+                            >
+                            <input
+                                type="password"
+                                class="
+                                    form-control
+                                    {%-
+                                    errors.cpassword
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %}
+                                "
+                                id="cpassword"
+                                name="cpassword"
+                                placeholder="Enter your password"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                *{%= errors.cpassword ? errors.cpassword : '' %}
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input
+                                    class="
+                                        form-check-input
+                                        {%-
+                                        errors.terms
+                                        ?
+                                        'is-invalid'
+                                        :
+                                        ''
+                                        %}
+                                    "
+                                    type="checkbox"
+                                    id="terms"
+                                    name="terms"
+                                    checked
+                                    required
+                                />
+                                <label class="form-check-label text-dark" for="terms">
+                                    I agree with
+                                    <a
+                                        href="/terms"
+                                        class="text-decoration-none"
+                                        target="__blank"
+                                        >Terms & Conditions
+                                    </a>
+                                </label>
+                                <div class="invalid-feedback">
+                                    *{%= errors.terms ? errors.terms : '' %}
+                                </div>
+                            </div>
+                        </div>
+                        <input
+                            type="hidden"
+                            name="_csrf"
+                            value="{%- csrfToken ? csrfToken : '' %}"
+                        />
+                        <input
+                            type="submit"
+                            class="btn btn-primary w-100"
+                            value="Create account"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-5 d-none d-lg-block border-start ps-lg-0">
+            <div
+                class="
+                    bg-success
+                    d-flex
+                    justify-content-center
+                    align-items-center
+                    h-100
+                    rounded-end
+                "
+            >
+                <img
+                    src="/static/assets/signup.svg"
+                    class="img-fluid"
+                    style="max-height: 320px"
+                    alt="Signup Images"
+                    loading="lazy"
+                />
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End signup form  -->
+
+{%- include('./layouts/footer.ejs') %}

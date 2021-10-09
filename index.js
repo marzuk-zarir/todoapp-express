@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const { dbConnect } = require('./config/config')
+const setMiddlewares = require('./middlewares')
 const { notfoundHandler, internalErrorHandler } = require('./middlewares/error')
 const setRouters = require('./routers')
 const app = express()
@@ -8,6 +9,8 @@ const port = process.env.PORT || 3000
 
 // Database configure
 dbConnect()
+
+// console.log(dbConnect())
 
 // Development livereload
 if (app.get('env') === 'development') {
@@ -30,6 +33,7 @@ app.set('view engine', 'ejs')
 app.disable('x-powered-by')
 
 // Middlewares
+setMiddlewares(app)
 
 // Routers
 setRouters(app)

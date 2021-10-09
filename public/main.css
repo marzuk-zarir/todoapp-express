@@ -18,6 +18,39 @@ body {
     margin-top: 56px;
 }
 
+.flash {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    min-width: 320px;
+    color: #f4f4f4;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0.45rem;
+    backdrop-filter: blur(50px);
+    z-index: 1031;
+    transform: translate(-50%, 0);
+    transition: 0.3s transform;
+}
+
+.flash-danger {
+    background-color: rgba(218, 41, 46, 0.8);
+}
+
+.flash-success {
+    background-color: rgba(47, 179, 128, 0.9);
+}
+
+.flash-hide {
+    top: 0;
+    transform: translate(-50%, -100%);
+}
+
+.signup-row,
+.login-row {
+    padding-top: 60px;
+}
+
 /* *********************
     Footer section
 ********************* */

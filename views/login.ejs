@@ -1,0 +1,110 @@
+{%- include('./layouts/header.ejs') %}
+
+<!-- Login form  -->
+<div class="container">
+    {%- include('./partials/flash.ejs') %}
+    <div class="row justify-content-center login-row">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+            <div class="card border-0 rounded-start shadow-none bg-light">
+                <div class="card-body px-3 px-md-4">
+                    <h1 class="h2 fw-light text-center mb-4">Login to your account</h1>
+                    <form action="/auth/login" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input
+                                type="text"
+                                class="
+                                    form-control
+                                    {%-
+                                    errors.username
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %}
+                                "
+                                id="username"
+                                name="username"
+                                value="{%- values.username ? values.username : '' %}"
+                                placeholder="Enter your username"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                *{%= errors.username ? errors.username : '' %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input
+                                type="password"
+                                class="
+                                    form-control
+                                    {%-
+                                    errors.password
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %}
+                                "
+                                id="password"
+                                name="password"
+                                value="{%- values.password ? values.password : '' %}"
+                                placeholder="Enter your password"
+                                required
+                            />
+                            <div class="invalid-feedback">
+                                *{%= errors.password ? errors.password : '' %}
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input
+                                    class="
+                                        form-check-input
+                                        {%-
+                                        errors.remember
+                                        ?
+                                        'is-invalid'
+                                        :
+                                        ''
+                                        %}
+                                    "
+                                    type="checkbox"
+                                    id="remember"
+                                    name="remember"
+                                    value="on"
+                                    checked
+                                />
+                                <label
+                                    class="form-check-label text-dark"
+                                    for="remember"
+                                    title="Remember password for future login"
+                                    data-bs-toggle="tooltip"
+                                >
+                                    Remember Me
+                                </label>
+                                <div class="invalid-feedback">
+                                    *{%= errors.remember ? errors.remember : '' %}
+                                </div>
+                            </div>
+                        </div>
+                        <input
+                            type="hidden"
+                            name="_csrf"
+                            value="{%- csrfToken ? csrfToken : '' %}"
+                        />
+                        <input
+                            type="submit"
+                            class="btn btn-primary w-100"
+                            value="Login"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End login form  -->
+
+{%- include('./layouts/footer.ejs') %}
