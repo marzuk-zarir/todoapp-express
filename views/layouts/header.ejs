@@ -23,8 +23,21 @@
         ></script>
         <script src="/static/main.js" defer></script>
         <link rel="shortcut icon" href="/static/assets/todoapp.ico" type="image/x-icon" />
-        <title>{%= title %} - Todo App</title>
+        <title><%= title %> - Todo App</title>
     </head>
     <body class="preload">
-        <header id="header">{%- include('../partials/navbar.ejs') %}</header>
-        <main id="main">
+        <header id="header"><%- include('../partials/navbar.ejs') %></header>
+        <main id="wrapper">
+            <noscript
+                ><p class="lead text-danger text-center">
+                    For full functionality of this site it is necessary to enable
+                    JavaScript
+                    <a
+                        class="text-decoration-none"
+                        href="https://www.enable-javascript.com/"
+                        target="__blank"
+                        rel="noreferrer noopener"
+                        >Learn More.</a
+                    >
+                </p></noscript
+            >

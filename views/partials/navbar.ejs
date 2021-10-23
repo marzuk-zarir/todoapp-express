@@ -1,7 +1,15 @@
 <!-- Top navbar -->
-<nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-lg fixed-top py-2">
+<nav
+    class="
+        navbar navbar-expand-md navbar-dark
+        bg-primary
+        shadow-lg
+        fixed-top
+        py-2
+    "
+>
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Todo App</a>
+        <a class="navbar-brand" href="/">TodoApp</a>
         <button
             class="navbar-toggler border-0 shadow-none"
             type="button"
@@ -14,26 +22,39 @@
         </button>
         <div class="collapse navbar-collapse" id="top-navbar">
             <ul class="navbar-nav me-auto">
-                {% if(user.isLoggedIn) { %}
+                <% if(user.isLoggedIn) { %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/todo/user">Todo</a>
+                    <a class="nav-link" href="/todo/<%- user.data.username %>"
+                        ><i class="bi bi-clipboard-check"></i> My Todo</a
+                    >
                 </li>
-                {% } %}
+                <% } %>
             </ul>
-            <div class="pt-2 pt-md-0">
-                {% if(!user.isLoggedIn) { %}
+            <ul class="navbar-nav mt-3 mt-md-0">
+                <% if(!user.isLoggedIn) { %>
                 <li class="nav-item">
-                    <a class="btn btn-warning me-1" href="/auth/signup">Sign up</a>
-                    <a class="btn btn-success me-1" href="/auth/login">Login</a>
+                    <a class="btn btn-success" href="/auth/login"
+                        >Login <i class="bi bi-box-arrow-in-right"></i
+                    ></a>
                 </li>
-                {% } %} {% if(user.isLoggedIn) { %}
-                <a class="btn btn-danger me-1" href="#logoutModal" data-bs-toggle="modal"
-                    >Logout</a
-                >
-                {% } %}
-            </div>
+                <li class="nav-item">
+                    <a class="btn btn-warning" href="/auth/signup"
+                        ><i class="bi bi-person-circle"></i> Sign up</a
+                    >
+                </li>
+                <% } %> <% if(user.isLoggedIn) { %>
+                <li class="nav-item">
+                    <a
+                        class="btn btn-danger"
+                        href="#logoutModal"
+                        data-bs-toggle="modal"
+                        ><i class="bi bi-power"></i> Logout</a
+                    >
+                </li>
+                <% } %>
+            </ul>
         </div>
     </div>
 </nav>
-{% if(user.isLoggedIn) { %} {%- include('./logout.ejs') %} {% } %}
+<% if(user.isLoggedIn) { %> <%- include('./logout.ejs') %> <% } %>
 <!-- End top navbar -->

@@ -7,25 +7,27 @@ exports.checkToken = async (req, res, next) => {
             req.signedCookies[process.env.JWT_TOKEN_NAME],
             process.env.JWT_SECRET
         )
-        res.locals.user = { data: userData, isLoggedIn: true, pull: false, error: null }
+        res.locals.user = {
+            data: userData,
+            isLoggedIn: true,
+            fetch: false,
+            error: null
+        }
         next()
     } catch (err) {
+        const localsUser = {
+            data: null,
+            isLoggedIn: false,
+            fetch: false
+        }
         if (err.name === 'JsonWebTokenError') {
-            res.locals.user = {
-                data: null,
-                isLoggedIn: false,
-                pull: false,
-                error: 'Invalid token id. Please login again'
-            }
+            localsUser.error = 'Invalid token id. Please login again'
+            res.locals.user = localsUser
             return next()
         }
         if (err.name === 'TokenExpiredError') {
-            res.locals.user = {
-                data: null,
-                isLoggedIn: false,
-                pull: false,
-                error: 'Your session expired. Please login again'
-            }
+            localsUser.error = 'Your session expired. Please login again'
+            res.locals.user = localsUser
             return next()
         }
         next(err)
@@ -42,7 +44,7 @@ exports.requireAuth = async (req, res, next) => {
         res.locals.user = {
             data: await User.findById(user.data.id, '-password -email -__v'),
             isLoggedIn: true,
-            pull: true,
+            fetch: true,
             error: null
         }
         next()
@@ -52,10 +54,9 @@ exports.requireAuth = async (req, res, next) => {
 }
 
 exports.requireUnAuth = (req, res, next) => {
-    console.log(res.locals.user.isLoggedIn)
     if (res.locals.user.isLoggedIn) {
         req.flash('success', 'You are already logged in')
-        return res.redirect('/todo/user')
+        return res.redirect(`/todo/${res.locals.user.data.username}`)
     }
     next()
 }

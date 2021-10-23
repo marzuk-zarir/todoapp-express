@@ -1,0 +1,90 @@
+<%- include('../layouts/header.ejs') %>
+
+<div class="container">
+    <%- include('../partials/flash.ejs') %>
+    <div class="row pt-3">
+        <div class="text-end">
+            <a href="/todo/new" class="btn btn-success">
+                <i class="bi bi-plus-circle-fill"></i> New todo
+            </a>
+        </div>
+    </div>
+    <div class="row py-5">
+        <% if(todos.length) { %> <% todos.forEach(({id, title, description,
+        color, createdAt}) => { %>
+        <div class="col-md-6 col-xxl-4 mb-3">
+            <div
+                class="card rounded-3 shadow-sm text-light"
+                style="background-color: <%- color %>"
+            >
+                <div class="card-body h-100 p-3">
+                    <h5 class="card-title"><%= title %></h5>
+                    <p class="card-text"><%= description %></p>
+                    <div
+                        class="
+                            d-flex
+                            justify-content-between
+                            align-items-center
+                        "
+                    >
+                        <small
+                            >Created on <%= createdAt.toDateString() %>
+                        </small>
+                        <div data-todo-id="<%- id %>">
+                            <a
+                                id="editTodoBtn"
+                                href="/todo/edit?id=<%- id %>&method=put"
+                                class="text-decoration-none link-dark me-2"
+                            >
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <button id="removeTodoBtn">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %> <% } else { %>
+        <h2 class="text-center fw-light">There is no todo 😞</h2>
+        <% } %>
+    </div>
+</div>
+
+<!-- Todo remove confirmation modal -->
+<div id="removeTodoModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="removeTodoForm" class="d-inline">
+                <div class="modal-body py-2">
+                    <p class="lead mb-0">
+                        Are you sure want to remove this todo?
+                    </p>
+                </div>
+                <div class="modal-footer bg-white px-3 py-2">
+                    <button
+                        type="button"
+                        class="btn btn-info"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+                    <input
+                        type="hidden"
+                        name="_csrf"
+                        value="<%- csrfToken ? csrfToken : '' %>"
+                    />
+                    <input
+                        type="submit"
+                        class="btn btn-danger"
+                        value="Remove"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End todo remove confirmation modal -->
+
+<%- include('../layouts/footer.ejs') %>

@@ -1,0 +1,138 @@
+<%- include('../layouts/header.ejs') %>
+
+<div class="container">
+    <%- include('../partials/flash.ejs') %>
+    <div class="row justify-content-center p-50">
+        <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+            <h1 class="h2 fw-light text-center mb-4"><%- heading %></h1>
+            <div class="card border-0 rounded-start shadow-none bg-light">
+                <div class="card-body px-3 px-md-4 py-5">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="todo_title" class="form-label"
+                                >Todo Title</label
+                            >
+                            <input
+                                type="text"
+                                class="
+                                    form-control
+                                    <%-
+                                    errors.todo_title
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %>
+                                "
+                                id="todo_title"
+                                name="todo_title"
+                                value="<%- values.todo_title ? values.todo_title : '' %>"
+                                placeholder="Enter todo title in (4 - 30) characters"
+                            />
+                            <div class="invalid-feedback">
+                                *<%= errors.todo_title ? errors.todo_title : ''
+                                %>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="todo_description" class="form-label"
+                                >Todo Description</label
+                            >
+                            <textarea
+                                name="todo_description"
+                                id="todo_description"
+                                class="
+                                    form-control
+                                    <%-
+                                    errors.todo_description
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %>
+                                "
+                                style="min-height: 200px"
+                                placeholder="Enter todo description in (10 - 120) characters"
+                            >
+                            <%- values.todo_description ? values.todo_description : '' %>
+                            </textarea>
+                            <div class="invalid-feedback">
+                                *<%= errors.todo_description ?
+                                errors.todo_description : '' %>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <label for="todo_color" class="form-label mb-0"
+                                    >Todo Color</label
+                                >
+                                <div
+                                    id="todoColors"
+                                    class="
+                                        d-flex
+                                        justify-content-center
+                                        flex-wrap
+                                        ms-1
+                                    "
+                                >
+                                    <% [ '#fcd34d', '#fca5a5',
+                                    '#34d399','#4d7c0f', '#6366f1' ,'#7c3aed'
+                                    ,'#f97316', '#ef4444' ].forEach(color => {
+                                    %>
+                                    <span
+                                        class="rounded-circle m-1"
+                                        style="background: <%= color %>"
+                                    ></span>
+                                    <% }) %>
+                                </div>
+                            </div>
+                            <input
+                                type="hidden"
+                                name="todo_color"
+                                value="<%- values.todo_color ? values.todo_color : '' %>"
+                                class="
+                                    <%-
+                                    errors.todo_color
+                                    ?
+                                    'is-invalid'
+                                    :
+                                    ''
+                                    %>
+                                "
+                            />
+                            <div class="invalid-feedback text-end">
+                                *<%= errors.todo_color ? errors.todo_color : ''
+                                %>
+                            </div>
+                        </div>
+                        <input
+                            type="hidden"
+                            name="_csrf"
+                            value="<%- csrfToken ? csrfToken : '' %>"
+                        />
+                        <div
+                            class="
+                                d-flex
+                                flex-column flex-column-reverse flex-sm-row
+                                justify-content-end
+                            "
+                        >
+                            <a
+                                href="/todo/<%- user.data.username %>"
+                                class="btn btn-dark me-sm-2"
+                                >Cancel</a
+                            >
+                            <input
+                                type="submit"
+                                class="btn btn-success mb-2 mb-sm-0"
+                                value="Save change"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../layouts/footer.ejs') %>

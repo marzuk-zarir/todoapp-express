@@ -18,12 +18,8 @@ function setMiddlewares(app) {
         csurf({ cookie: true }),
         session,
         flash(),
-        setLocals,
         checkToken,
-        (req, res, next) => {
-            // console.log(res.locals)
-            next()
-        }
+        setLocals
     ]
     app.use(middlewares)
 }

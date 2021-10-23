@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            <%- include('./email.css') %>
+        </style>
+        <title>TodoApp Reset Password</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div id="topNav">
+                    <h1><a href="<%- domain %>">TodoApp</a></h1>
+                </div>
+                <div id="email-body">
+                    <h2 class="text-center" style="margin-bottom: 25px">
+                        TodoApp Password Reset
+                    </h2>
+                    <p class="text">Hello <%= username %>,</p>
+                    <p class="text">
+                        We received a request to
+                        <span class="fw-bold">reset your password</span> for your account.
+                        We're here to help!
+                    </p>
+                    <p class="text">
+                        Simply click on the link below to set a new password:
+                    </p>
+                    <p class="text text-center">
+                        <a href="<%- resetPasswordLink %>" target="__blank" class="btn"
+                            >Change Password</a
+                        >
+                    </p>
+                    <p class="text">
+                        If you didn't ask to change your password, don't worry! Your
+                        password is still safe and you can delete this email.
+                    </p>
+                    <p class="text">
+                        Thanks,<br />
+                        TodoApp Team
+                    </p>
+                </div>
+                <div id="footer">
+                    <p class="text-center">
+                        If you don’t use this link within 10 minutes, it will expire. To
+                        get a new password reset link,
+                        <a href="<%= domain %>/account/forgot-password" class="link"
+                            >click here</a
+                        >
+                    </p>
+                    <p class="text-center">
+                        © 2021 All rights reserved by
+                        <a href="https://github.com/marzuk-zarir" target="__blank"
+                            >Marzuk Zarir</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

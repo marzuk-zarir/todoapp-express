@@ -6,7 +6,7 @@ const Flash = require('../utils/Flash')
 
 // Render signup page
 exports.getSignupHandler = (req, res, next) => {
-    res.render('signup', {
+    res.render('pages/signup', {
         title: 'Signup',
         values: {},
         errors: {},
@@ -21,7 +21,7 @@ exports.postSignupHandler = async (req, res, next) => {
 
     if (!errors.isEmpty()) {
         req.flash('error', 'Please try again with valid information')
-        return res.render('signup', {
+        return res.render('pages/signup', {
             title: 'Signup',
             values: { username, email, password, terms },
             errors: errors.mapped(),
@@ -33,7 +33,7 @@ exports.postSignupHandler = async (req, res, next) => {
         const newUser = new User({ username, email, password })
         await newUser.save()
         req.flash('success', 'User is created successfully')
-        res.render('login', {
+        res.render('pages/login', {
             title: 'Login',
             values: { username },
             errors: {},
@@ -46,7 +46,7 @@ exports.postSignupHandler = async (req, res, next) => {
 
 // Render login page
 exports.getLoginHandler = (req, res, next) => {
-    res.render('login', {
+    res.render('pages/login', {
         title: 'Login',
         values: {},
         errors: {},
@@ -56,13 +56,12 @@ exports.getLoginHandler = (req, res, next) => {
 
 // Login form handler
 exports.postLoginHandler = async (req, res, next) => {
-    console.log(req.body)
     const { username, password, remember } = req.body
     const errors = validationResult(req).formatWith(({ msg }) => msg)
 
     if (!errors.isEmpty()) {
         req.flash('error', 'Please provide valid information')
-        return res.render('login', {
+        return res.render('pages/login', {
             title: 'Login',
             values: { username },
             errors: errors.mapped(),
@@ -74,7 +73,7 @@ exports.postLoginHandler = async (req, res, next) => {
         const user = await User.findOne({ username })
         if (!user) {
             req.flash('error', 'Invalid Credentials')
-            return res.render('login', {
+            return res.render('pages/login', {
                 title: 'Login',
                 values: { username },
                 errors: { username: 'Invalid Credentials' },
@@ -84,7 +83,7 @@ exports.postLoginHandler = async (req, res, next) => {
         const isPasswordMatch = await bcrypt.compare(password, user.password)
         if (!isPasswordMatch) {
             req.flash('error', 'Invalid Credentials')
-            return res.render('login', {
+            return res.render('pages/login', {
                 title: 'Login',
                 values: { username },
                 errors: { password: 'Invalid Credentials' },
@@ -106,7 +105,7 @@ exports.postLoginHandler = async (req, res, next) => {
 
         res.cookie(process.env.JWT_TOKEN_NAME, token, cookieOptions)
         req.flash('success', 'You are logged in successfully')
-        res.redirect('/todo/user')
+        res.redirect(`/todo/${username}`)
     } catch (err) {
         next(err)
     }

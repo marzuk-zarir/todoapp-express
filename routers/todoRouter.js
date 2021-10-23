@@ -1,12 +1,25 @@
 const todoRouter = require('express').Router()
-const Flash = require('../utils/Flash')
+const {
+    getNewTodo,
+    postNewTodo,
+    getUserTodo,
+    postRemoveTodo,
+    getUpdateTodo,
+    postUpdateTodo
+} = require('../controllers/todoController')
+const {
+    createTodoSchema,
+    removeTodoSchema,
+    updateTodoSchema
+} = require('../schemas/todoSchema')
+const userSchema = require('../schemas/userSchema')
 
-todoRouter.get('/user', (req, res) => {
-    res.render('todo', {
-        title: 'Todo',
-        message: Flash.getMsg(req),
-        errors: {}
-    })
-})
+todoRouter.get('/new', getNewTodo)
+todoRouter.post('/new', createTodoSchema, postNewTodo)
+todoRouter.post('/remove', removeTodoSchema, postRemoveTodo)
+todoRouter.get('/edit', updateTodoSchema, getUpdateTodo)
+todoRouter.post('/edit', updateTodoSchema, createTodoSchema, postUpdateTodo)
+
+todoRouter.get('/:username', userSchema, getUserTodo)
 
 module.exports = todoRouter

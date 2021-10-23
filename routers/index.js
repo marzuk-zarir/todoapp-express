@@ -1,12 +1,18 @@
 const authRouter = require('./authRouter')
 const mainRouter = require('./mainRouter')
 const todoRouter = require('./todoRouter')
-const { requireAuth } = require('../middlewares/auth')
+const { requireAuth, requireUnAuth } = require('../middlewares/auth')
+const accountRouter = require('./accountRouter')
 
 const routers = [
     {
         path: '/auth',
         handler: authRouter
+    },
+    {
+        path: '/account',
+        middlewares: [requireUnAuth],
+        handler: accountRouter
     },
     {
         path: '/todo',

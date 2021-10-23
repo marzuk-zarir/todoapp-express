@@ -1,13 +1,15 @@
-{%- include('./layouts/header.ejs') %}
+<%- include('../layouts/header.ejs') %>
 
 <!-- Signup form  -->
 <div class="container">
-    {%- include('./partials/flash.ejs') %}
-    <div class="row justify-content-center signup-row">
+    <%- include('../partials/flash.ejs') %>
+    <div class="row justify-content-center p-50">
         <div class="col-md-9 col-lg-6 col-xl-5 pe-lg-0">
             <div class="card border-0 rounded-start shadow-none bg-light">
                 <div class="card-body px-3 px-md-4">
-                    <h1 class="h2 fw-light text-center mb-4">Create a user account</h1>
+                    <h1 class="h2 fw-light text-center mb-3">
+                        Create a user account
+                    </h1>
                     <form action="/auth/signup" method="post">
                         <div class="mb-3">
                             <label
@@ -21,22 +23,22 @@
                                 type="text"
                                 class="
                                     form-control
-                                    {%-
+                                    <%-
                                     errors.username
                                     ?
                                     'is-invalid'
                                     :
                                     ''
-                                    %}
+                                    %>
                                 "
                                 id="username"
                                 name="username"
-                                value="{%- values.username ? values.username : '' %}"
+                                value="<%- values.username ? values.username : '' %>"
                                 placeholder="Enter your username"
                                 required
                             />
                             <div class="invalid-feedback">
-                                *{%= errors.username ? errors.username : '' %}
+                                *<%= errors.username ? errors.username : '' %>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -51,22 +53,22 @@
                                 type="text"
                                 class="
                                     form-control
-                                    {%-
+                                    <%-
                                     errors.email
                                     ?
                                     'is-invalid'
                                     :
                                     ''
-                                    %}
+                                    %>
                                 "
                                 id="email"
                                 name="email"
-                                value="{%- values.email ? values.email : '' %}"
+                                value="<%- values.email ? values.email : '' %>"
                                 placeholder="Enter your email address"
                                 required
                             />
                             <div class="invalid-feedback">
-                                *{%= errors.email ? errors.email : '' %}
+                                *<%= errors.email ? errors.email : '' %>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -81,25 +83,25 @@
                                 type="password"
                                 class="
                                     form-control
-                                    {%-
+                                    <%-
                                     errors.password
                                     ?
                                     'is-invalid'
                                     :
                                     ''
-                                    %}
+                                    %>
                                 "
                                 id="password"
                                 name="password"
-                                value="{%- values.password ? values.password : '' %}"
+                                value="<%- values.password ? values.password : '' %>"
                                 placeholder="Enter your password"
                                 required
                             />
                             <div class="invalid-feedback">
-                                *{%= errors.password ? errors.password : '' %}
+                                *<%= errors.password ? errors.password : '' %>
                             </div>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label
                                 for="cpassword"
                                 class="form-label"
@@ -111,13 +113,13 @@
                                 type="password"
                                 class="
                                     form-control
-                                    {%-
+                                    <%-
                                     errors.cpassword
                                     ?
                                     'is-invalid'
                                     :
                                     ''
-                                    %}
+                                    %>
                                 "
                                 id="cpassword"
                                 name="cpassword"
@@ -125,21 +127,21 @@
                                 required
                             />
                             <div class="invalid-feedback">
-                                *{%= errors.cpassword ? errors.cpassword : '' %}
+                                *<%= errors.cpassword ? errors.cpassword : '' %>
                             </div>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <div class="form-check">
                                 <input
                                     class="
                                         form-check-input
-                                        {%-
+                                        <%-
                                         errors.terms
                                         ?
                                         'is-invalid'
                                         :
                                         ''
-                                        %}
+                                        %>
                                     "
                                     type="checkbox"
                                     id="terms"
@@ -147,7 +149,10 @@
                                     checked
                                     required
                                 />
-                                <label class="form-check-label text-dark" for="terms">
+                                <label
+                                    class="form-check-label text-dark"
+                                    for="terms"
+                                >
                                     I agree with
                                     <a
                                         href="/terms"
@@ -157,20 +162,27 @@
                                     </a>
                                 </label>
                                 <div class="invalid-feedback">
-                                    *{%= errors.terms ? errors.terms : '' %}
+                                    *<%= errors.terms ? errors.terms : '' %>
                                 </div>
                             </div>
                         </div>
                         <input
                             type="hidden"
                             name="_csrf"
-                            value="{%- csrfToken ? csrfToken : '' %}"
+                            value="<%- csrfToken ? csrfToken : '' %>"
                         />
                         <input
                             type="submit"
                             class="btn btn-primary w-100"
                             value="Create account"
                         />
+                        <div class="mt-3 text-center">
+                            <a
+                                href="/auth/login"
+                                class="text-decoration-none fw-light"
+                                >Already have an account? Login</a
+                            >
+                        </div>
                     </form>
                 </div>
             </div>
@@ -199,4 +211,4 @@
 </div>
 <!-- End signup form  -->
 
-{%- include('./layouts/footer.ejs') %}
+<%- include('../layouts/footer.ejs') %>

@@ -10,8 +10,6 @@ const port = process.env.PORT || 3000
 // Database configure
 dbConnect()
 
-// console.log(dbConnect())
-
 // Development livereload
 if (app.get('env') === 'development') {
     require('./utils/livereload')(app)
@@ -23,8 +21,6 @@ app.use('/static', express.static(__dirname + '/public'))
 // View engine
 app.set('views', __dirname + '/views')
 app.set('view options', {
-    openDelimiter: '{',
-    closeDelimiter: '}',
     rmWhitespace: true
 })
 app.set('view engine', 'ejs')
